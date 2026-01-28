@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+from .const import DEFAULT_HOST,DEFAULT_PORT
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -11,7 +12,10 @@ _LOGGER = logging.getLogger(__name__)
 class OledModuleApi:
     """API for communicating with the OLED module via TCP socket."""
 
-    def __init__(self, host: str, port: int) -> None:
+    def __init__(
+            self,
+            host: str = DEFAULT_HOST,
+            port: int = DEFAULT_PORT) -> None:
         """Initialize the OLED module API."""
         self._host = host
         self._port = port

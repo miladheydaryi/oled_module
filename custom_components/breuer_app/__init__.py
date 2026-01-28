@@ -7,6 +7,7 @@ from homeassistant.const import CONF_HOST, CONF_PORT, Platform
 from homeassistant.core import HomeAssistant
 
 from .api import OledModuleApi
+from .const import DEFAULT_HOST,DEFAULT_PORT
 
 _PLATFORMS: list[Platform] = [Platform.BUTTON]
 
@@ -15,8 +16,8 @@ type BreuerConfigEntry = ConfigEntry[OledModuleApi]
 async def async_setup_entry(hass: HomeAssistant, entry: BreuerConfigEntry) -> bool:
     """Set up OLED module from config entry."""
     api = OledModuleApi(
-        host=entry.data[CONF_HOST],
-        port=entry.data[CONF_PORT],
+        host=entry.data.get[CONF_HOST,DEFAULT_HOST],
+        port=entry.data.get[CONF_PORT,DEFAULT_PORT],
     )
 
     await api.async_connect()
