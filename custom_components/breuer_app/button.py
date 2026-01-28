@@ -17,7 +17,7 @@ async def async_setup_entry(
     async_add_entities,
 ) -> None:
     """Set up the button platform."""
-    api: OledModuleApi = hass.data[DOMAIN][entry.entry_id]
+    api: OledModuleApi = entry.runtime_data
 
     async_add_entities([BreuerSendTextButton(api)])
 
