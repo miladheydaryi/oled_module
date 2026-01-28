@@ -12,13 +12,14 @@ _PLATFORMS: list[Platform] = [Platform.BUTTON]
 
 type BreuerConfigEntry = ConfigEntry[OledModuleApi]
 
-
 async def async_setup_entry(hass: HomeAssistant, entry: BreuerConfigEntry) -> bool:
     """Set up OLED module from config entry."""
     api = OledModuleApi(
         host=entry.data[CONF_HOST],
         port=entry.data[CONF_PORT],
     )
+
+    await api.async_connect()
 
     entry.runtime_data = api
 
@@ -28,4 +29,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: BreuerConfigEntry) -> bo
 
 async def async_unload_entry(hass: HomeAssistant, entry: BreuerConfigEntry) -> bool:
     """Unload a config entry."""
+    api: OledModuleApi = entry.runtime_data
+    await api.async_disconnect()
     return await hass.config_entries.async_unload_platforms(entry, _PLATFORMS)

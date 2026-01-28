@@ -7,9 +7,6 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
 from .api import OledModuleApi
-from .const import DOMAIN
-
-
 
 async def async_setup_entry(
     hass: HomeAssistant,
@@ -34,4 +31,4 @@ class BreuerSendTextButton(ButtonEntity):
 
     async def async_press(self) -> None:
         """Handle the button press."""
-        await self._api.async_send_text("Hello from Home Assistant!")
+        await self._api.async_send_text("Hello from HA!")
