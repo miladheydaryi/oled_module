@@ -56,10 +56,11 @@ class OledModuleApi:
                 await self.async_connect()
 
             try:
-                payload = encode_text_to_oled_payload(text)
-
+                #payload = encode_text_to_oled_payload(text)
+                _LOGGER.debug(text)
+                #_LOGGER.info(payload)
                 assert self._writer is not None
-                self._writer.write(payload)
+                self._writer.write(text)
                 await self._writer.drain()
 
             except (ConnectionError, OSError):
