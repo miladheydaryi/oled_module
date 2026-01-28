@@ -6,8 +6,9 @@ from homeassistant.components.button import ButtonEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
-from .api import BreuerAppApi
+from .api import OledModuleApi
 from .const import DOMAIN
+
 
 
 async def async_setup_entry(
@@ -16,7 +17,7 @@ async def async_setup_entry(
     async_add_entities,
 ) -> None:
     """Set up the button platform."""
-    api: BreuerAppApi = hass.data[DOMAIN][entry.entry_id]
+    api: OledModuleApi = hass.data[DOMAIN][entry.entry_id]
 
     async_add_entities([BreuerSendTextButton(api)])
 
@@ -27,7 +28,7 @@ class BreuerSendTextButton(ButtonEntity):
     _attr_name = "Send text to OLED"
     _attr_icon = "mdi:monitor"
 
-    def __init__(self, api: BreuerAppApi) -> None:
+    def __init__(self, api: OledModuleApi) -> None:
         """Initialize the button."""
         self._api = api
 
