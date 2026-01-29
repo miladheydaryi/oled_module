@@ -58,8 +58,8 @@ class OledModuleApi:
 
             try:
                 payload = encode_text_to_oled_payload(oled_show_text(text))
-                _LOGGER.debug(text)
-                _LOGGER.info(payload)
+                _LOGGER.info("Sending text: %s", text)
+                _LOGGER.info("Payload bytes: %s", payload)
                 assert self._writer is not None
                 self._writer.write(payload)
                 await self._writer.drain()

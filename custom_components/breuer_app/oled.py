@@ -67,5 +67,5 @@ def oled_show_text(text: str) -> Message:
         value = (hi << 8) | lo
         params.append(value)
 
-    # NTYPE + 8 Parameter
-    return Message(params=[NTYPE_OLED_SHOW_TEXT, *params])
+    # 0 + NTYPE + 8 Parameter
+    return Message(params=[0, NTYPE_OLED_SHOW_TEXT, *params])
