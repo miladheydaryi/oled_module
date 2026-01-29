@@ -1,4 +1,4 @@
-"""Text platform for Breuer App."""
+"""Text platform for oled App."""
 
 from __future__ import annotations
 
@@ -16,10 +16,10 @@ async def async_setup_entry(
     """Set up the text platform."""
     api: OledModuleApi = entry.runtime_data
 
-    async_add_entities([BreuerOledText(api)])
+    async_add_entities([OledText(api)])
 
 
-class BreuerOledText(TextEntity):
+class OledText(TextEntity):
     """Text entity for OLED display."""
 
     _attr_name = "OLED Text"

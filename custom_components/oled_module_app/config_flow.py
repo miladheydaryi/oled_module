@@ -1,4 +1,4 @@
-"""Config flow for the breuer_app integration."""
+"""Config flow for the oled_module_app integration."""
 
 from __future__ import annotations
 
@@ -29,7 +29,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for breuer_app."""
+    """Handle a config flow for oled_module_app."""
 
     VERSION = 1
 

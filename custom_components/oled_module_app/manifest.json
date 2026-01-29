@@ -1,10 +1,10 @@
 {
-  "domain": "breuer_app",
-  "name": "breuer_oled_module",
+  "domain": "oled_module_app",
+  "name": "oled_module_app",
   "codeowners": ["@miladheydaryi"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://www.home-assistant.io/integrations/breuer_app",
+  "documentation": "https://github.com/miladheydaryi/oled_module/blob/main/README.md",
   "homekit": {},
   "iot_class": "local_polling",
   "quality_scale": "bronze",

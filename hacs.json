@@ -1,5 +1,5 @@
 {
-  "name": "Breuer OLED App",
+  "name": "OLED Module App",
   "content_in_root": false,
-  "domain": "breuer_app"
+  "domain": "oled_module_app"
 }

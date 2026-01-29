@@ -1,4 +1,4 @@
-"""Init for the breuer_app integration."""
+"""Init for the oled_module_app integration."""
 
 from __future__ import annotations
 import logging
@@ -12,9 +12,9 @@ from .const import DEFAULT_HOST,DEFAULT_PORT
 
 _PLATFORMS: list[Platform] = [Platform.BUTTON, Platform.TEXT]
 _LOGGER = logging.getLogger(__name__)
-type BreuerConfigEntry = ConfigEntry[OledModuleApi]
+type OledConfigEntry = ConfigEntry[OledModuleApi]
 
-async def async_setup_entry(hass: HomeAssistant, entry: BreuerConfigEntry) -> bool:
+async def async_setup_entry(hass: HomeAssistant, entry: OledConfigEntry) -> bool:
     """Set up OLED module from config entry."""
     api = OledModuleApi(
         host=entry.data.get(CONF_HOST,DEFAULT_HOST),
@@ -36,7 +36,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: BreuerConfigEntry) -> bo
     return True
 
 
-async def async_unload_entry(hass: HomeAssistant, entry: BreuerConfigEntry) -> bool:
+async def async_unload_entry(hass: HomeAssistant, entry: OledConfigEntry) -> bool:
     """Unload a config entry."""
     api: OledModuleApi = entry.runtime_data
     await api.async_disconnect()
