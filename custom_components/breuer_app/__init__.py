@@ -10,7 +10,7 @@ from homeassistant.core import HomeAssistant
 from .api import OledModuleApi
 from .const import DEFAULT_HOST,DEFAULT_PORT
 
-_PLATFORMS: list[Platform] = [Platform.BUTTON]
+_PLATFORMS: list[Platform] = [Platform.BUTTON, Platform.TEXT]
 _LOGGER = logging.getLogger(__name__)
 type BreuerConfigEntry = ConfigEntry[OledModuleApi]
 
