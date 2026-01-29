@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from .const import DEFAULT_HOST,DEFAULT_PORT
+from .oled import Message,oled_show_text
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -56,11 +57,11 @@ class OledModuleApi:
                 await self.async_connect()
 
             try:
-                #payload = encode_text_to_oled_payload(text)
+                payload = encode_text_to_oled_payload(oled_show_text(text))
                 _LOGGER.debug(text)
-                #_LOGGER.info(payload)
+                _LOGGER.info(payload)
                 assert self._writer is not None
-                self._writer.write(text)
+                self._writer.write(payload)
                 await self._writer.drain()
 
             except (ConnectionError, OSError):
@@ -71,26 +72,8 @@ class OledModuleApi:
                 assert self._writer is not None
                 self._writer.write(f"{text}\n".encode())
                 await self._writer.drain()
-
-MAX_OLED_TEXT_LENGTH = 16  # same as your Java code
-PADDING_BYTE = 0x21        # '!' invalid/empty char
         
-def encode_text_to_oled_payload(text: str) -> bytes:
-    """Convert text into OLED HEX payload.
-
-    - UTF-8 encoded
-    - Max 16 bytes
-    - Padded with 0x21
-    - Big-endian 16-bit words (8 shorts)
-    """
-    if len(text) > MAX_OLED_TEXT_LENGTH:
-        text = text[:MAX_OLED_TEXT_LENGTH]
-
-    # Create padded byte array
-    padded = bytearray([PADDING_BYTE] * MAX_OLED_TEXT_LENGTH)
-
-    encoded = text.encode("utf-8")
-    padded[: len(encoded)] = encoded
+def encode_text_to_oled_payload(msg: Message) -> bytes:
 
     # Convert to bytes (already big-endian compatible)
-    return bytes(padded)
+    return bytes(msg.to_str())

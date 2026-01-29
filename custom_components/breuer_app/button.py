@@ -31,4 +31,4 @@ class BreuerSendTextButton(ButtonEntity):
 
     async def async_press(self) -> None:
         """Handle the button press."""
-        await self._api.async_send_text("$0,12,18034,28525,8264,16673,8481,8481,8481,8481*4d4e28a0")
+        await self._api.async_send_text("From HA")
