@@ -74,6 +74,5 @@ class OledModuleApi:
                 await self._writer.drain()
         
 def encode_text_to_oled_payload(msg: Message) -> bytes:
-
     # Convert to bytes (already big-endian compatible)
-    return bytes(msg.to_str())
+    return msg.to_str().encode('utf-8')
