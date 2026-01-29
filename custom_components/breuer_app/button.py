@@ -16,7 +16,10 @@ async def async_setup_entry(
     """Set up the button platform."""
     api: OledModuleApi = entry.runtime_data
 
-    async_add_entities([BreuerSendTextButton(api)])
+    async_add_entities([
+        BreuerSendTextButton(api),
+        BreuerClearTextButton(api)
+    ])
 
 
 class BreuerSendTextButton(ButtonEntity):
@@ -32,3 +35,18 @@ class BreuerSendTextButton(ButtonEntity):
     async def async_press(self) -> None:
         """Handle the button press."""
         await self._api.async_send_text("From HA")
+
+
+class BreuerClearTextButton(ButtonEntity):
+    """Button to clear text from OLED."""
+
+    _attr_name = "Clear OLED"
+    _attr_icon = "mdi:monitor-off"
+
+    def __init__(self, api: OledModuleApi) -> None:
+        """Initialize the button."""
+        self._api = api
+
+    async def async_press(self) -> None:
+        """Handle the button press."""
+        await self._api.async_clear_text()

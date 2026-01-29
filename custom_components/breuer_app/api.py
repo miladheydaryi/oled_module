@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from .const import DEFAULT_HOST,DEFAULT_PORT
-from .oled import Message,oled_show_text
+from .oled import Message,oled_show_text,oled_clear_text
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -72,7 +72,30 @@ class OledModuleApi:
                 assert self._writer is not None
                 self._writer.write(f"{text}\n".encode())
                 await self._writer.drain()
-        
+
+    async def async_clear_text(self) -> None:
+        """Clear text from the OLED module."""
+        async with self._lock:
+            if self._writer is None:
+                await self.async_connect()
+
+            try:
+                payload = encode_text_to_oled_payload(oled_clear_text())
+                _LOGGER.info("Clearing OLED display")
+                _LOGGER.info("Payload bytes: %s", payload)
+                assert self._writer is not None
+                self._writer.write(payload)
+                await self._writer.drain()
+
+            except (ConnectionError, OSError):
+                _LOGGER.warning("Connection lost, reconnecting...")
+                await self.async_disconnect()
+                await self.async_connect()
+
+                assert self._writer is not None
+                self._writer.write(payload)
+                await self._writer.drain()
+
 def encode_text_to_oled_payload(msg: Message) -> bytes:
     # Convert to bytes (already big-endian compatible)
     return msg.to_str().encode('utf-8')

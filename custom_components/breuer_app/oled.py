@@ -69,3 +69,8 @@ def oled_show_text(text: str) -> Message:
 
     # 0 + NTYPE + 8 Parameter
     return Message(params=[0, NTYPE_OLED_SHOW_TEXT, *params])
+
+
+def oled_clear_text() -> Message:
+    """Clear text from OLED."""
+    return Message(params=[0, NTYPE_OLED_CLEAR_TEXT])
