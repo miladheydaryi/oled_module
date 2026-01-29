@@ -1,5 +1,5 @@
 {
-  "name": "OLED Module App",
+  "name": "My Custom Module App",
   "content_in_root": false,
-  "domain": "oled_module_app"
+  "render_readme": true
 }
