@@ -34,3 +34,7 @@ class Message:
         message = f"{TMCP_START}{payload}{TMCP_END}{checksum}{TMCP_NLCR}{TMCP_NLLF}"
         print(message)
         return message
+
+    def to_byte(self) -> bytes:
+        # Convert to bytes (already big-endian compatible)
+        return self.to_str().encode('utf-8')

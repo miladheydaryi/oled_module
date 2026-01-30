@@ -7,7 +7,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_HOST, CONF_PORT, Platform
 from homeassistant.core import HomeAssistant
 
-from .api import OledModuleApi
+from .oled_api import OledModuleApi
 from .const import DEFAULT_HOST
 from .._shared.const import DEFAULT_PORT
 

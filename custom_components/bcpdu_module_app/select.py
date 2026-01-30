@@ -7,7 +7,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import EntityCategory
 from homeassistant.core import HomeAssistant
 
-from .api import BcpduModuleApi
+from .bcpdu_api import BcpduModuleApi
 
 OPTIONS = ["off", "KL30", "KL15"]
 

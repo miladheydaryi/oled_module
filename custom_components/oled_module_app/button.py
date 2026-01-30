@@ -7,7 +7,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
 from . import OledConfigEntry
-from .api import OledModuleApi
+from .oled_api import OledModuleApi
 
 async def async_setup_entry(
     hass: HomeAssistant,
