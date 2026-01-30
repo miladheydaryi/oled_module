@@ -103,7 +103,7 @@ class BcpduModuleApi:
                 await self.async_connect()
 
             try:
-                payload = encode_text_to_bcpdu_payload(bcpdu_set_channel(channel, state))
+                payload = encode_text_to_bcpdu_payload(bcpdu_set_channel_state(channel, state))
                 _LOGGER.info("Setting channel %d to %s", channel, state)
                 _LOGGER.info("Payload bytes: %s", payload)
                 assert self._writer is not None

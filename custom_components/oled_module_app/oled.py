@@ -1,51 +1,6 @@
 from __future__ import annotations
 
-import zlib
-from dataclasses import dataclass, field
-from typing import List
-
-# --- Protocol-Konstanten ---
-TMCP_START = '$'
-TMCP_END = '*'
-TMCP_NLCR = '\r'
-TMCP_NLLF = '\n'
-TMCP_SEPARATOR = ','
-
-TMCP_PARAM_MAX = 15
-
-NTYPE_OLED_SHOW_TEXT = 12
-NTYPE_OLED_CLEAR_TEXT = 11
-
-
-# --- CRC Checksum ---
-class CrcChecksum:
-    def __init__(self, buffer: str | None = None, checksum: int | None = None):
-        self.checksumval = 0
-        if buffer is not None:
-            data = buffer.encode()  # entspricht Java: buffer.getBytes()
-            self.checksumval = zlib.crc32(data) & 0xFFFFFFFF
-        elif checksum is not None:
-            self.checksumval = checksum & 0xFFFFFFFF
-
-    def to_str(self) -> str:
-        return f"{self.checksumval:08x}"
-
-
-# --- Message ---
-@dataclass
-class Message:
-    params: List[int] = field(default_factory=list)
-
-    def __post_init__(self):
-        self.params = self.params[:TMCP_PARAM_MAX]
-
-    def to_str(self) -> str:
-        payload = TMCP_SEPARATOR.join(str(p) for p in self.params)
-        checksum = CrcChecksum(payload).to_str()
-        message = f"{TMCP_START}{payload}{TMCP_END}{checksum}{TMCP_NLCR}{TMCP_NLLF}"
-        print(message)
-        return message
-
+from .._shared.message import Message,NTYPE_OLED_SHOW_TEXT,NTYPE_OLED_CLEAR_TEXT
 
 # --- oledShowText (Python) ---
 def oled_show_text(text: str) -> Message:
