@@ -10,12 +10,13 @@ from homeassistant.core import HomeAssistant
 from .oled_api import OledModuleApi
 from .const import DEFAULT_HOST
 from .._shared.const import DEFAULT_PORT
+from .._shared.socket_client import AsyncTcpClient
 
 _PLATFORMS: list[Platform] = [Platform.BUTTON, Platform.TEXT]
 _LOGGER = logging.getLogger(__name__)
 type OledConfigEntry = ConfigEntry[OledModuleApi]
 
-async def async_setup_entry(hass: HomeAssistant, entry: OledConfigEntry) -> bool:
+async def async_setup_entry(self,hass: HomeAssistant, entry: OledConfigEntry) -> bool:
     """Set up OLED module from config entry."""
     api = OledModuleApi(
         host=entry.data.get(CONF_HOST,DEFAULT_HOST),
@@ -23,10 +24,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: OledConfigEntry) -> bool
     )
 
     try:
-        await api.async_connect()
+        await AsyncTcpClient.connect(self)
     except ConnectionRefusedError:
         _LOGGER.warning(
-            "Could not connect to OLED at %s:%s. Will retry when sending text.",
+            "Could not connect to BCPDU at %s:%s. Will retry when sending text.",
             api._host,
             api._port,
         )

@@ -6,7 +6,6 @@ from homeassistant.components.button import ButtonEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
-from . import OledConfigEntry
 from .oled_api import OledModuleApi
 
 async def async_setup_entry(

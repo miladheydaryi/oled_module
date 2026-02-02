@@ -16,7 +16,7 @@ _PLATFORMS: list[Platform] = [ Platform.SELECT]
 _LOGGER = logging.getLogger(__name__)
 type BcpduConfigEntry = ConfigEntry[BcpduModuleApi]
 
-async def async_setup_entry(hass: HomeAssistant, entry: BcpduConfigEntry) -> bool:
+async def async_setup_entry(self,hass: HomeAssistant, entry: BcpduConfigEntry) -> bool:
     """Set up Bcpdu module from config entry."""
     api = BcpduModuleApi(
         host=entry.data.get(CONF_HOST,DEFAULT_HOST),
@@ -24,12 +24,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: BcpduConfigEntry) -> boo
     )
 
     try:
-        await AsyncTcpClient.connect()
+        await AsyncTcpClient.connect(self)
     except ConnectionRefusedError:
         _LOGGER.warning(
             "Could not connect to BCPDU at %s:%s. Will retry when sending text.",
-            api._host,
-            api._port,
+            self._host,
+            self._port,
         )
 
     entry.runtime_data = api
