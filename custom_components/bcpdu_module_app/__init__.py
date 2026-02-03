@@ -8,9 +8,8 @@ from homeassistant.const import CONF_HOST, CONF_PORT, Platform
 from homeassistant.core import HomeAssistant
 
 from .bcpdu_api import BcpduModuleApi
-from .const import DEFAULT_HOST
-from .._shared.const import DEFAULT_PORT
-from .._shared.socket_client import AsyncTcpClient
+from .const import DEFAULT_HOST,DEFAULT_PORT
+from .socket_client import AsyncTcpClient
 
 _PLATFORMS: list[Platform] = [ Platform.SELECT]
 _LOGGER = logging.getLogger(__name__)

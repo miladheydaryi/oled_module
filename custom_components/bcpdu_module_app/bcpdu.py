@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .._shared.message import Message,NTYPE_CON_STATE_SET,NTYPE_CON_STATE_GET
+from .message import Message,NTYPE_CON_STATE_SET,NTYPE_CON_STATE_GET
 
 # --- bcpdu Get State (Python) ---
 def bcpdu_get_channel_state(channel: int) -> Message:

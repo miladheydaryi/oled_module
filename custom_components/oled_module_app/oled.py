@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .._shared.message import Message,NTYPE_OLED_SHOW_TEXT,NTYPE_OLED_CLEAR_TEXT
+from .message import Message,NTYPE_OLED_SHOW_TEXT,NTYPE_OLED_CLEAR_TEXT
 
 def oled_show_text(text: str) -> Message:
     text = text[:16]

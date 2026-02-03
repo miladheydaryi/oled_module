@@ -12,8 +12,7 @@ from homeassistant.const import CONF_HOST, CONF_PORT
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
 
-from .const import DOMAIN, DEFAULT_HOST
-from .._shared.const import DEFAULT_PORT
+from .const import DOMAIN, DEFAULT_HOST,DEFAULT_PORT
 
 STEP_USER_DATA_SCHEMA = vol.Schema(
     {

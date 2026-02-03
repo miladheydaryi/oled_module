@@ -3,10 +3,9 @@
 from __future__ import annotations
 
 import logging
-from .const import DEFAULT_HOST
-from .._shared.const import DEFAULT_PORT
+from .const import DEFAULT_HOST,DEFAULT_PORT
 from .bcpdu import bcpdu_set_channel_state
-from .._shared.socket_client import AsyncTcpClient
+from .socket_client import AsyncTcpClient
 
 _LOGGER = logging.getLogger(__name__)
 

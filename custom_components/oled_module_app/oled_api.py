@@ -4,9 +4,8 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from .const import DEFAULT_HOST
-from .._shared.const import DEFAULT_PORT
-from .._shared.socket_client import AsyncTcpClient
+from .const import DEFAULT_HOST,DEFAULT_PORT
+from .socket_client import AsyncTcpClient
 from .oled import oled_show_text,oled_clear_text
 
 _LOGGER = logging.getLogger(__name__)
