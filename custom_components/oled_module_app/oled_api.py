@@ -21,6 +21,14 @@ class OledModuleApi:
         """Initialize the OLED module API."""
         self._client = AsyncTcpClient(host, port)
 
+    async def async_connect(self) -> None:
+        """Connect to the OLED module."""
+        await self._client.connect()
+
+    async def async_disconnect(self) -> None:
+        """Disconnect from the OLED module."""
+        await self._client.disconnect()
+
     async def async_send_text(self, text: str) -> None:
         """Send text to the OLED module."""
         payload = oled_show_text(text)

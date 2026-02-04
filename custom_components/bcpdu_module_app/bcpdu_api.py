@@ -19,6 +19,14 @@ class BcpduModuleApi:
         """Initialize the BCPDU module API."""
         self._client=AsyncTcpClient(host,port)
 
+    async def async_connect(self) -> None:
+        """Connect to the BCPDU module."""
+        await self._client.connect()
+
+    async def async_disconnect(self) -> None:
+        """Disconnect from the BCPDU module."""
+        await self._client.disconnect()
+
     async def async_set_channel(self, channel: int, state: str) -> None:
         payload = bcpdu_set_channel_state(channel, state)
         _LOGGER.debug("Setting channel %d to %s", channel, state)
