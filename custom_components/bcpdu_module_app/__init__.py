@@ -9,13 +9,11 @@ from homeassistant.core import HomeAssistant
 
 from .bcpdu_api import BcpduModuleApi
 from .const import DEFAULT_HOST,DEFAULT_PORT
-from .socket_client import AsyncTcpClient
-
 _PLATFORMS: list[Platform] = [ Platform.SELECT]
 _LOGGER = logging.getLogger(__name__)
 type BcpduConfigEntry = ConfigEntry[BcpduModuleApi]
 
-async def async_setup_entry(self,hass: HomeAssistant, entry: BcpduConfigEntry) -> bool:
+async def async_setup_entry(hass: HomeAssistant, entry: BcpduConfigEntry) -> bool:
     """Set up Bcpdu module from config entry."""
     api = BcpduModuleApi(
         host=entry.data.get(CONF_HOST,DEFAULT_HOST),
@@ -23,12 +21,12 @@ async def async_setup_entry(self,hass: HomeAssistant, entry: BcpduConfigEntry) -
     )
 
     try:
-        await AsyncTcpClient.connect(self)
-    except ConnectionRefusedError:
+        await api.async_connect()
+    except (ConnectionError, OSError):
         _LOGGER.warning(
             "Could not connect to BCPDU at %s:%s. Will retry when sending text.",
-            self._host,
-            self._port,
+            entry.data.get(CONF_HOST,DEFAULT_HOST),
+            entry.data.get(CONF_PORT,DEFAULT_PORT),
         )
 
     entry.runtime_data = api
