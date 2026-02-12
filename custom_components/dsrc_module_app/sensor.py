@@ -9,6 +9,7 @@ from homeassistant.helpers.dispatcher import async_dispatcher_connect
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .const import DOMAIN, SIGNAL_PAYLOAD_UPDATED
+from .dsrc_api import DsrcModuleApi
 
 
 async def async_setup_entry(
@@ -36,7 +37,8 @@ class DsrcSensorManager:
 
     @property
     def _runtime(self) -> object | None:
-        return self.hass.data.get(DOMAIN, {}).get(self.entry.entry_id)
+        api: DsrcModuleApi = self.entry.runtime_data
+        return api.runtime if api is not None else None
 
     async def async_setup(self) -> None:
         """Register dispatcher and create initial sensors."""
@@ -82,7 +84,8 @@ class DsrcKeySensor(SensorEntity):
 
     @property
     def _runtime(self) -> object | None:
-        return self.hass.data.get(DOMAIN, {}).get(self.entry.entry_id)
+        api: DsrcModuleApi = self.entry.runtime_data
+        return api.runtime if api is not None else None
 
     @property
     def native_value(self) -> str | None:
