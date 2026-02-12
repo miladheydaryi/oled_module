@@ -1,0 +1,18 @@
+{
+  "domain": "dsrc_module_app",
+  "name": "dsrc_module_app",
+  "codeowners": [
+    "@miladheydaryi"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/miladheydaryi/oled_module/blob/main/custom_components/dsrc_module_app/README.md",
+  "iot_class": "local_polling",
+  "quality_scale": "bronze",
+  "requirements": [
+    "asyncio-mqtt==0.16.2"
+  ],
+  "ssdp": [],
+  "zeroconf": [],
+  "version": "0.0.1"
+}
