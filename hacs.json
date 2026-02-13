@@ -1,5 +1,5 @@
 {
-  "name": "My Custom Module App",
-  "content_in_root": false,
-  "render_readme": true
+  "name": "Breuer OLED integration - Lantronix",
+  "render_readme": true,
+  "zip_release": false
 }
